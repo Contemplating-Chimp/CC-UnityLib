@@ -58,3 +58,13 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+CC-UnityLib/Library/
+
+CC-UnityLib/obj/
+
+CC-UnityLib/ProjectSettings/
+
+CC-UnityLib/Temp/
+
+assets/
