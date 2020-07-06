@@ -9,3 +9,16 @@ E:\Jan Julius\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csproj.Cor
 E:\Jan Julius\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csproj.CopyComplete
 E:\Jan Julius\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.dll
 E:\Jan Julius\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.pdb
+E:\CC-UnityLib\CC-UnityLib.Core\bin\Debug\CC-UnityLib.Core.dll
+E:\CC-UnityLib\CC-UnityLib.Core\bin\Debug\CC-UnityLib.Core.pdb
+E:\CC-UnityLib\CC-UnityLib.Core\bin\Debug\UnityEngine.CoreModule.dll
+E:\CC-UnityLib\CC-UnityLib.Core\bin\Debug\UnityEngine.SharedInternalsModule.dll
+E:\CC-UnityLib\CC-UnityLib.Core\bin\Debug\UnityEngine.CoreModule.xml
+E:\CC-UnityLib\CC-UnityLib.Core\bin\Debug\UnityEngine.SharedInternalsModule.xml
+E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csprojAssemblyReference.cache
+E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csproj.CoreCompileInputs.cache
+E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csproj.CopyComplete
+E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.dll
+E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.pdb
+E:\Output\CC-UnityLib.Core.dll
+E:\Output\CC-UnityLib.Core.pdb
