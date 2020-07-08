@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace CC_UnityLib.Core.Extensions
+namespace CC_UnityLib.Core.Extensions.Vectors
 {
     public static class Vector2Extensions
     {
