@@ -21,5 +21,17 @@ namespace CC_UnityLib.Core.Extensions
         public static void Destroy(this GameObject src, float delay) =>
             MonoBehaviour.Destroy(src, delay);
 
+        public static void DestroyChildren(this GameObject src) {
+            foreach (Transform child in src.transform)
+                child.gameObject.Destroy();
+        }
+
+        public static void DestroyChildren(this List<GameObject> list)
+        {
+            foreach (GameObject g in list)
+                g.Destroy();
+            list = new List<GameObject>();
+        }
+
     }
 }

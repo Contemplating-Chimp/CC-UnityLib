@@ -15,5 +15,10 @@ namespace CC_UnityLib.Core.Extensions
                 t.parent = target;
         }
 
+        public static void DestroyChildren(this Transform src)
+        {
+            src.gameObject.DestroyChildren();
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 E:\CC-UnityLib\CC-UnityLib.Input\bin\Debug\CC-UnityLib.Input.dll
 E:\CC-UnityLib\CC-UnityLib.Input\bin\Debug\CC-UnityLib.Input.pdb
-E:\CC-UnityLib\CC-UnityLib.Input\obj\Debug\CC-UnityLib.Input.csprojAssemblyReference.cache
 E:\CC-UnityLib\CC-UnityLib.Input\obj\Debug\CC-UnityLib.Input.csproj.CoreCompileInputs.cache
 E:\CC-UnityLib\CC-UnityLib.Input\obj\Debug\CC-UnityLib.Input.dll
 E:\CC-UnityLib\CC-UnityLib.Input\obj\Debug\CC-UnityLib.Input.pdb
+E:\CC-UnityLib\Output\CC-UnityLib.Input.dll
+E:\CC-UnityLib\Output\CC-UnityLib.Input.pdb
