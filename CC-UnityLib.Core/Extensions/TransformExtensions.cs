@@ -20,5 +20,20 @@ namespace CC_UnityLib.Core.Extensions
             src.gameObject.DestroyChildren();
         }
 
+        public static void Destroy(this Transform src)
+        {
+            MonoBehaviour.Destroy(src);
+        }
+
+        public static void Destroy(this Transform src, float delay)
+        {
+            MonoBehaviour.Destroy(src, delay);
+        }
+
+        public static void ReverseChildren(this Transform src)
+        {
+            for (int i = 0; i < src.childCount; i++)
+                src.GetChild(0).SetSiblingIndex(src.childCount - 1 - i);
+        }
     }
 }

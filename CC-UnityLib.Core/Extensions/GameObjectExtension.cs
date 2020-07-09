@@ -22,16 +22,23 @@ namespace CC_UnityLib.Core.Extensions
             MonoBehaviour.Destroy(src, delay);
 
         public static void DestroyChildren(this GameObject src) {
-            foreach (Transform child in src.transform)
-                child.gameObject.Destroy();
+            for (int i = src.transform.childCount - 1; i >= 0; i--)
+                src.transform.GetChild(i).Destroy();
         }
 
         public static void DestroyChildren(this List<GameObject> list)
         {
-            foreach (GameObject g in list)
-                g.Destroy();
+            for (int i = list.Count - 1; i >= 0; i--)
+                list[i].Destroy();
             list = new List<GameObject>();
         }
+
+        public static void ReverseChildren(this GameObject src)
+        {
+            src.transform.ReverseChildren();
+        }
+
+        //TODO Transfer all children backward loop : before.transform.GetChild(i).parent = bgInstance.transform;
 
     }
 }
