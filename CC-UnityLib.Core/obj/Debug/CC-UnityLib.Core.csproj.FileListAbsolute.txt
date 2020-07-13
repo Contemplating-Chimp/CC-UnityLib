@@ -21,3 +21,4 @@ E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.dll
 E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.pdb
 E:\Output\CC-UnityLib.Core.dll
 E:\Output\CC-UnityLib.Core.pdb
+E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csprojAssemblyReference.cache
