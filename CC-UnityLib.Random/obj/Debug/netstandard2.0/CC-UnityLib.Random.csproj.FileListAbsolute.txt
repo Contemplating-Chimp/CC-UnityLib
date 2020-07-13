@@ -1,0 +1,14 @@
+E:\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\CC-UnityLib.Random.deps.json
+E:\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\CC-UnityLib.Random.dll
+E:\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\CC-UnityLib.Random.pdb
+E:\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\UnityEngine.CoreModule.dll
+E:\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\UnityEngine.SharedInternalsModule.dll
+E:\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\UnityEngine.CoreModule.xml
+E:\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\UnityEngine.SharedInternalsModule.xml
+E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.csprojAssemblyReference.cache
+E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.csproj.CoreCompileInputs.cache
+E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.AssemblyInfoInputs.cache
+E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.AssemblyInfo.cs
+E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.csproj.CopyComplete
+E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.dll
+E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.pdb
