@@ -11,47 +11,100 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
 {
     public class CountDown : MonoBehaviour, CCUnityLibCoroutine
     {
-        public float CountDownTime { private get; set; } = 1f;
+        /// <summary>
+        /// The interval between ticks in seconds needs to be divisable through <see cref="CountDownTime"/>
+        /// </summary>
+        public float CountDownInterval { private get; set; } = 1f;
+        /// <summary>
+        /// The text shown after the countdown has finished.
+        /// </summary>
+        public string FinalText { private get; set; } = "0";
+        /// <summary>
+        /// The time it takes for the countdown to finish
+        /// </summary>
+        public float CountDownTime { get; private set; } = 3f;
 
-        private string countDownText;
+        public float FinalTime { get; set; } = 0f;
+
+        private string _countDownText;
+        /// <summary>
+        /// The text used for counting down
+        /// </summary>
         public string CountDownText
         {
-            get => countDownText;
-            set
+            get => _countDownText;
+            private set
             {
-                countDownText = value;
-                OnValueChanged(null);
+                _countDownText = value;
+                OnCountDownTextChanged(null);
             }
         }
+        
+        /// <summary>
+        /// Event called when the CountDownText is updated based on interval
+        /// </summary>
+        public event EventHandler CountDownTextChanged;
+        /// <summary>
+        /// Event is called when the countdown is finished.
+        /// </summary>
+        public event EventHandler CountDownFinished;
 
-        public event EventHandler ValueChanged;
-
-        private void OnValueChanged(EventArgs e)
+        private void OnCountDownTextChanged(EventArgs e)
         {
-            ValueChanged?.Invoke(this, e);
+            CountDownTextChanged?.Invoke(this, e);
         }
 
-        public delegate void CountDownTextHandler(string newText);
-        public event CountDownTextHandler CountDownTextChanged;
-
-        private void OnCountDownTextChanged(string text)
+        private void OnCountDownFinished(EventArgs e)
         {
-            CountDownTextChanged(text);
+            CountDownFinished?.Invoke(this, e);
         }
         
         public static CountDown Init()
         {
+            return Init(3f, 1f, "0");
+        }
+
+        /// <summary>
+        /// Initiates the countdown
+        /// </summary>
+        /// <param name="countDownTime">The time it takes from start to finish</param>
+        /// <param name="interval">The interval between updating</param>
+        /// <param name="finalText">Text to show at the end</param>
+        /// <returns></returns>
+        public static CountDown Init(float countDownTime, float interval, string finalText)
+        {
             var obj = new GameObject();
-            obj.AddComponent<CountDown>();
+            CountDown cnt = obj.AddComponent<CountDown>();
+            cnt.CountDownInterval = interval; cnt.FinalText = finalText; cnt.CountDownTime = countDownTime;
             return obj.GetComponent<CountDown>();
         }
 
         private IEnumerator Coroutine()
         {
-            yield return new WaitForSeconds(1f);
-            CountDownText = "LOOOOOOOOOOOOL";
-            print($"coroutine elapsed {CountDownTime} seconds\n will now destroy object");
-            gameObject.Destroy();
+            int iterations = GetLoopIterations();
+            CountDownText = CountDownTime.ToString();
+            for (int i = 0; i < iterations; i++)
+            {
+                yield return new WaitForSeconds(CountDownInterval);
+                CountDownTime -= CountDownInterval;
+                CountDownText = CountDownTime.ToString();
+                if (CountDownTime <= FinalTime) 
+                {
+                    gameObject.Destroy();
+                    CountDownText = FinalText;
+                    OnCountDownFinished(null);
+                    break;
+                }
+            }
+
+        }
+
+        private int GetLoopIterations()
+        {
+            if((CountDownTime % CountDownInterval) == 0)
+                return (int)Mathf.Round(CountDownTime / CountDownInterval) + 1;
+            else
+                throw new InvalidOperationException("The countDownTime % CountDownInterval had leftovers, the countdown will be incorrect.");
         }
         
         /// <summary>
