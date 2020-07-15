@@ -268,3 +268,5 @@ E:\CC-UnityLib\CC-UnityLib.Visual\obj\Debug\CC-UnityLib.Visual.dll
 E:\CC-UnityLib\CC-UnityLib.Visual\obj\Debug\CC-UnityLib.Visual.pdb
 E:\CC-UnityLib\Output\CC-UnityLib.Visual.dll
 E:\CC-UnityLib\Output\CC-UnityLib.Visual.pdb
+E:\Output\CC-UnityLib.Visual.dll
+E:\Output\CC-UnityLib.Visual.pdb

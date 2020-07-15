@@ -104,7 +104,7 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             if((CountDownTime % CountDownInterval) == 0)
                 return (int)Mathf.Round(CountDownTime / CountDownInterval) + 1;
             else
-                throw new InvalidOperationException("The countDownTime % CountDownInterval had leftovers, the countdown will be incorrect.");
+                throw new InvalidOperationException("The countDownTime % CountDownInterval had leftovers, the countdown will be incorrect. Make sure the interval fits into the CountDownTime.");
         }
         
         /// <summary>
