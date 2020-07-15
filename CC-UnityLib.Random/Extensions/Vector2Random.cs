@@ -17,7 +17,7 @@ namespace CC_UnityLib.Random.Extensions
         /// <returns>Vector2 with given constraints</returns>
         public static Vector2 GenerateVector2(float xMin, float xMax, float yMin, float yMax)
             => new Vector2(UnityEngine.Random.Range(xMin, xMax), UnityEngine.Random.Range(yMin, yMax));
-        
+
         /// <summary>
         /// generates a random vector within 2 vectors (min inclusive and max exclusive)
         /// </summary>
@@ -26,6 +26,6 @@ namespace CC_UnityLib.Random.Extensions
         /// <returns></returns>
         public static Vector2 GenerateVector2(Vector2 leftTop, Vector2 rightBottom)
             => GenerateVector2(leftTop.x, leftTop.y, rightBottom.x, rightBottom.y);
-        
+
     }
 }
