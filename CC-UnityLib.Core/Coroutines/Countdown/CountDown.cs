@@ -58,11 +58,6 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
         {
             CountDownFinished?.Invoke(this, e);
         }
-        
-        public static CountDown Init()
-        {
-            return Init(3f, 1f, "0");
-        }
 
         /// <summary>
         /// Initiates the countdown
