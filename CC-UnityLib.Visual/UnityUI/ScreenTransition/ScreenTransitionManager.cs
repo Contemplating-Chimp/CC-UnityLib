@@ -6,8 +6,13 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 {
     public class ScreenTransitionManager : MonoBehaviour
     {
+        private bool isTransitioning = false;
+
         public void Transition(ScreenTransition transition, Canvas before, Canvas after, float transitionTime)
         {
+            if (isTransitioning)
+                return;
+            isTransitioning = true;
             before.gameObject.SetActive(true);
             GameObject bgInstance = new GameObject();
             bgInstance.transform.parent = before.gameObject.transform;
@@ -76,6 +81,8 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
             a.MoveChildren(aCanvas.gameObject);
             b.Destroy();
             a.Destroy();
+
+            isTransitioning = false;
             bCanvas.gameObject.SetActive(false);
 
         }
@@ -101,6 +108,8 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
             a.MoveChildren(aCanvas.gameObject);
             b.Destroy();
             a.Destroy();
+
+            isTransitioning = false;
         }
 
         /// <summary>
