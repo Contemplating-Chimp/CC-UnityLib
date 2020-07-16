@@ -24,3 +24,9 @@ E:\Output\CC-UnityLib.Core.pdb
 E:\CC-UnityLib\Output\CC-UnityLib.Core.dll
 E:\CC-UnityLib\Output\CC-UnityLib.Core.pdb
 E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csprojAssemblyReference.cache
+C:\Users\God\Documents\CC-UnityLib\Output\CC-UnityLib.Core.dll
+C:\Users\God\Documents\CC-UnityLib\Output\CC-UnityLib.Core.pdb
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csproj.CoreCompileInputs.cache
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csproj.CopyComplete
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.dll
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.pdb
