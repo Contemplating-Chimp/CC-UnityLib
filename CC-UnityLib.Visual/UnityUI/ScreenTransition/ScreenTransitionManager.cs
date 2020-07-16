@@ -8,6 +8,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
     {
         public void Transition(ScreenTransition transition, Canvas before, Canvas after, float transitionTime)
         {
+            before.gameObject.SetActive(true);
             GameObject bgInstance = new GameObject();
             bgInstance.transform.parent = before.gameObject.transform;
 
@@ -68,6 +69,10 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
                 a.transform.position = Vector3.Lerp(startPosA, targetPosA, t);
                 yield return null;
             }
+            b.transform.position = startPosB;
+            bCanvas.gameObject.SetActive(false);
+            b.ReverseChildren();
+            a.ReverseChildren();
             b.MoveChildren(bCanvas.gameObject);
             a.MoveChildren(aCanvas.gameObject);
             b.Destroy();
@@ -89,6 +94,8 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
                 a.transform.position = Vector3.Lerp(startPosA, targetPosA, t);
                 yield return null;
             }
+            b.ReverseChildren();
+            a.ReverseChildren();
             b.MoveChildren(bCanvas.gameObject);
             a.MoveChildren(aCanvas.gameObject);
             b.Destroy();

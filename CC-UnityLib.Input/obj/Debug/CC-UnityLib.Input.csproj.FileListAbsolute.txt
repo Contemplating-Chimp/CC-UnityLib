@@ -5,3 +5,6 @@ E:\CC-UnityLib\CC-UnityLib.Input\obj\Debug\CC-UnityLib.Input.dll
 E:\CC-UnityLib\CC-UnityLib.Input\obj\Debug\CC-UnityLib.Input.pdb
 E:\CC-UnityLib\Output\CC-UnityLib.Input.dll
 E:\CC-UnityLib\Output\CC-UnityLib.Input.pdb
+E:\Output\CC-UnityLib.Input.dll
+E:\Output\CC-UnityLib.Input.pdb
+E:\CC-UnityLib\CC-UnityLib.Input\obj\Debug\CC-UnityLib.Input.csprojAssemblyReference.cache

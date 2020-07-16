@@ -511,3 +511,4 @@ E:\CC-UnityLib\CC-UnityLib\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.ca
 E:\CC-UnityLib\CC-UnityLib\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 E:\CC-UnityLib\CC-UnityLib\obj\Debug\Assembly-CSharp.dll
 E:\CC-UnityLib\CC-UnityLib\obj\Debug\Assembly-CSharp.pdb
+E:\CC-UnityLib\CC-UnityLib\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache

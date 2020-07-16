@@ -11,8 +11,8 @@ namespace CC_UnityLib.Core.Extensions
     {
         public static void MoveChildren(this Transform src, Transform target)
         {
-            foreach(Transform t in src)
-                t.parent = target;
+            for (int i = src.transform.childCount - 1; i >= 0; i--)
+                src.transform.GetChild(i).parent = target;
         }
 
         public static void DestroyChildren(this Transform src)
