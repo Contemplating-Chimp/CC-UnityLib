@@ -270,3 +270,10 @@ E:\CC-UnityLib\Output\CC-UnityLib.Visual.dll
 E:\CC-UnityLib\Output\CC-UnityLib.Visual.pdb
 E:\Output\CC-UnityLib.Visual.dll
 E:\Output\CC-UnityLib.Visual.pdb
+C:\Users\God\Documents\CC-UnityLib\Output\CC-UnityLib.Visual.dll
+C:\Users\God\Documents\CC-UnityLib\Output\CC-UnityLib.Visual.pdb
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Visual\obj\Debug\CC-UnityLib.Visual.csprojAssemblyReference.cache
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Visual\obj\Debug\CC-UnityLib.Visual.csproj.CoreCompileInputs.cache
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Visual\obj\Debug\CC-UnityLib.Visual.csproj.CopyComplete
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Visual\obj\Debug\CC-UnityLib.Visual.dll
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Visual\obj\Debug\CC-UnityLib.Visual.pdb

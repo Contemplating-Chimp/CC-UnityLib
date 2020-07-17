@@ -88,13 +88,13 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
                 yield return null;
             }
             b.transform.position = startPosB;
-            bCanvas.gameObject.SetActive(false);
             b.ReverseChildren();
             a.ReverseChildren();
             b.MoveChildren(bCanvas.gameObject);
             a.MoveChildren(aCanvas.gameObject);
             b.Destroy();
             a.Destroy();
+            bCanvas.gameObject.SetActive(false);
             FinalizeTransition();
         }
 
