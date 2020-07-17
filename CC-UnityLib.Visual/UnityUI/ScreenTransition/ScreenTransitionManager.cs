@@ -15,6 +15,8 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         public bool CanQueueIdenticalTransitions { get; set; } = false;
 
+        private Transition currentTransition;
+
         public delegate void TransitionEventHandler(object sender, TransitionEventArgs e);
         
         public event TransitionEventHandler TransitionStarted;
@@ -22,6 +24,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         private void OnTransitionStarted(TransitionEventArgs e)
         {
+            currentTransition = e.transition;
             TransitionStarted?.Invoke(this, e);
         }
 
@@ -42,7 +45,11 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
             {
                 if (queue.Count == 0 && QueueEnabled)
                 {
-                    EnqueueTransition(t);
+                    if (currentTransition.FamilyName != t.FamilyName)
+                    {
+                        EnqueueTransition(t);
+                        return;
+                    }
                     return;
                 }
                 return;

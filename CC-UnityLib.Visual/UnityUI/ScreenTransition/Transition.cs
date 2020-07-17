@@ -10,6 +10,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
     public class Transition
     {
         public Guid UniqueIdentifier { private set; get; }
+        public Guid FamilyName { set; get; } = Guid.NewGuid();
         public ScreenTransition ScreenTransition { get; set; }
         public Canvas BeforeCanvas { get; set; }
         public Canvas AfterCanvas { get; set; }
@@ -35,5 +36,29 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
             TransitionTime = transitionTime;
             Queueable = queueable;
         }
+
+        public Transition(Guid uniqueIdentifier, ScreenTransition screenTransition, Canvas beforeCanvas, Canvas afterCanvas, float transitionTime, Guid familyName)
+        {
+            UniqueIdentifier = uniqueIdentifier;
+            FamilyName = familyName;
+            ScreenTransition = screenTransition;
+            BeforeCanvas = beforeCanvas;
+            AfterCanvas = afterCanvas;
+            TransitionTime = transitionTime;
+        }
+
+        public Transition(Guid uniqueIdentifier, ScreenTransition screenTransition, Canvas beforeCanvas, Canvas afterCanvas, float transitionTime, bool queueable, Guid familyName)
+        {
+            UniqueIdentifier = uniqueIdentifier;
+            FamilyName = familyName;
+            ScreenTransition = screenTransition;
+            BeforeCanvas = beforeCanvas;
+            AfterCanvas = afterCanvas;
+            TransitionTime = transitionTime;
+            Queueable = queueable;
+        }
+
+        public static Guid GenerateFamilyName() => Guid.NewGuid();
+                        
     }
 }
