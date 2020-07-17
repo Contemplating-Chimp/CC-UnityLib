@@ -1,4 +1,5 @@
 ﻿using CC_UnityLib.Core.Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,127 +8,160 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 {
     public class ScreenTransitionManager : MonoBehaviour
     {
+        public Guid UniqueIdentifier { private set; get; }
         private bool isTransitioning = false;
         private Queue<Transition> queue = new Queue<Transition>();
+        public bool QueueEnabled { get; set; } = true;
 
-        public void Transition(Transition transition)
+        public bool CanQueueIdenticalTransitions { get; set; } = false;
+
+        public delegate void TransitionEventHandler(object sender, TransitionEventArgs e);
+        
+        public event TransitionEventHandler TransitionStarted;
+        public event TransitionEventHandler TransitionEnded;
+
+        private void OnTransitionStarted(TransitionEventArgs e)
         {
-            Transition(transition.ScreenTransition, transition.BeforeCanvas, transition.AfterCanvas, transition.TransitionTime);
+            TransitionStarted?.Invoke(this, e);
         }
 
-        public void Transition(ScreenTransition transition, Canvas before, Canvas after, float transitionTime)
+        private void OnTransitionEnded(TransitionEventArgs e)
+        {
+            isTransitioning = false;
+            TransitionEnded?.Invoke(this, e);
+        }
+
+        private void Awake()
+        {
+            UniqueIdentifier = Guid.NewGuid();
+        }
+
+        public void Transition(Transition t)
         {
             if (isTransitioning)
             {
-                if (queue.Count == 0)
+                if (queue.Count == 0 && QueueEnabled)
                 {
-                    queue.Enqueue(new Transition(transition, before, after, transitionTime));
+                    EnqueueTransition(t);
                     return;
                 }
+                return;
             }
+            OnTransitionStarted(new TransitionEventArgs(t));
             isTransitioning = true;
-            before.gameObject.SetActive(true);
+            t.BeforeCanvas.gameObject.SetActive(true);
             GameObject bgInstance = new GameObject();
-            bgInstance.transform.parent = before.gameObject.transform;
+            bgInstance.transform.parent = t.BeforeCanvas.gameObject.transform;
 
-            for (int i = before.transform.childCount - 1; i >= 0; i--)
+            for (int i = t.BeforeCanvas.transform.childCount - 1; i >= 0; i--)
             {
-                before.transform.GetChild(i).parent = bgInstance.transform;
+                t.BeforeCanvas.transform.GetChild(i).parent = bgInstance.transform;
             }
             bgInstance.transform.ReverseChildren();
 
-            after.gameObject.SetActive(true);
+            t.AfterCanvas.gameObject.SetActive(true);
             GameObject agInstance = new GameObject();
-            agInstance.transform.parent = after.gameObject.transform;
+            agInstance.transform.parent = t.AfterCanvas.gameObject.transform;
 
-            for (int i = after.transform.childCount - 1; i >= 0; i--)
+            for (int i = t.AfterCanvas.transform.childCount - 1; i >= 0; i--)
             {
-                after.transform.GetChild(i).parent = agInstance.transform;
+                t.AfterCanvas.transform.GetChild(i).parent = agInstance.transform;
             }
             agInstance.transform.ReverseChildren();
 
-            ProcessTransition(transition, bgInstance, agInstance, transitionTime, before, after);
+            ProcessTransition(t, bgInstance, agInstance);
         }
 
-        internal void ProcessTransition(ScreenTransition transition, GameObject bgInstance, GameObject agInstance, float transitionTime, Canvas bCanvas, Canvas aCanvas)
+        internal void ProcessTransition(Transition t, GameObject bgInstance, GameObject agInstance)
         {
-            switch (transition)
+            switch (t.ScreenTransition)
             {
                 case ScreenTransition.SLIDE_LEFT_TO_RIGHT:
                 case ScreenTransition.SLIDE_RIGHT_TO_LEFT:
                 case ScreenTransition.SLIDE_UP_TO_DOWN:
                 case ScreenTransition.SLIDE_DOWN_TO_UP:
-                    StartCoroutine(SlideToTransition(transition, bgInstance, agInstance, transitionTime, bCanvas, aCanvas));
+                    StartCoroutine(SlideToTransition(t, bgInstance, agInstance));
                     break;
                 case ScreenTransition.SLIDE_OVER_FROM_DOWN:
                 case ScreenTransition.SLIDE_OVER_FROM_LEFT:
                 case ScreenTransition.SLIDE_OVER_FROM_RIGHT:
                 case ScreenTransition.SLIDE_OVER_FROM_UP:
-                    StartCoroutine(SlideOverTransition(transition, bgInstance, agInstance, transitionTime, bCanvas, aCanvas));
+                    StartCoroutine(SlideOverTransition(t, bgInstance, agInstance));
                     break;
             }
         }
 
-        IEnumerator SlideToTransition(ScreenTransition transition, GameObject b, GameObject a, float tTime, Canvas bCanvas, Canvas aCanvas)
+        private IEnumerator SlideToTransition(Transition transition, GameObject bgInstance, GameObject agInstance)
         {
-            a.transform.position = b.transform.position - GetDirectionVector(transition, Screen.width, Screen.height);
+            agInstance.transform.position = bgInstance.transform.position - GetDirectionVector(transition.ScreenTransition, Screen.width, Screen.height);
 
-            var startPosB = b.transform.position;
-            var startPosA = a.transform.position;
+            var startPosB = bgInstance.transform.position;
+            var startPosA = agInstance.transform.position;
 
-            var targetPosB = b.transform.position + GetDirectionVector(transition, Screen.width, Screen.height);
-            var targetPosA = b.transform.position;
+            var targetPosB = bgInstance.transform.position + GetDirectionVector(transition.ScreenTransition, Screen.width, Screen.height);
+            var targetPosA = bgInstance.transform.position;
 
             var t = 0f;
 
             while (t < 1)
             {
-                t += Time.deltaTime / tTime;
-                b.transform.position = Vector3.Lerp(startPosB, targetPosB, t);
-                a.transform.position = Vector3.Lerp(startPosA, targetPosA, t);
+                t += Time.deltaTime / transition.TransitionTime;
+                bgInstance.transform.position = Vector3.Lerp(startPosB, targetPosB, t);
+                agInstance.transform.position = Vector3.Lerp(startPosA, targetPosA, t);
                 yield return null;
             }
-            b.transform.position = startPosB;
-            b.ReverseChildren();
-            a.ReverseChildren();
-            b.MoveChildren(bCanvas.gameObject);
-            a.MoveChildren(aCanvas.gameObject);
-            b.Destroy();
-            a.Destroy();
-            bCanvas.gameObject.SetActive(false);
-            FinalizeTransition();
+            bgInstance.transform.position = startPosB;
+            bgInstance.ReverseChildren();
+            agInstance.ReverseChildren();
+            bgInstance.MoveChildren(transition.BeforeCanvas.gameObject);
+            agInstance.MoveChildren(transition.AfterCanvas.gameObject);
+            bgInstance.Destroy();
+            agInstance.Destroy();
+            transition.BeforeCanvas.gameObject.SetActive(false);
+
+            FinalizeTransition(transition);
         }
 
-        IEnumerator SlideOverTransition(ScreenTransition transition, GameObject b, GameObject a, float tTime, Canvas bCanvas, Canvas aCanvas)
+        private IEnumerator SlideOverTransition(Transition transition, GameObject bgInstance, GameObject agInstance)
         {
-            a.transform.position = b.transform.position - GetDirectionVector(transition, Screen.width, Screen.height);
+            agInstance.transform.position = bgInstance.transform.position - GetDirectionVector(transition.ScreenTransition, Screen.width, Screen.height);
 
-            var startPosA = a.transform.position;
-            var targetPosA = b.transform.position;
+            var startPosA = agInstance.transform.position;
+            var targetPosA = bgInstance.transform.position;
 
             var t = 0f;
 
             while (t < 1)
             {
-                t += Time.deltaTime / tTime;
-                a.transform.position = Vector3.Lerp(startPosA, targetPosA, t);
+                t += Time.deltaTime / transition.TransitionTime;
+                agInstance.transform.position = Vector3.Lerp(startPosA, targetPosA, t);
                 yield return null;
             }
-            b.ReverseChildren();
-            a.ReverseChildren();
-            b.MoveChildren(bCanvas.gameObject);
-            a.MoveChildren(aCanvas.gameObject);
-            b.Destroy();
-            a.Destroy();
+            bgInstance.ReverseChildren();
+            agInstance.ReverseChildren();
+            bgInstance.MoveChildren(transition.BeforeCanvas.gameObject);
+            agInstance.MoveChildren(transition.AfterCanvas.gameObject);
+            bgInstance.Destroy();
+            agInstance.Destroy();
 
-            FinalizeTransition();
+            FinalizeTransition(transition);
         }
 
-        private void FinalizeTransition()
+        private void FinalizeTransition(Transition transition)
         {
-            isTransitioning = false;
-            if (queue.Count > 0)
+            OnTransitionEnded(new TransitionEventArgs(transition));
+            if (queue.Count > 0 && QueueEnabled)
                 Transition(queue.Dequeue());
+        }
+
+        private void EnqueueTransition(Transition transition)
+        {
+            if(queue.Count > 0)
+                if (!CanQueueIdenticalTransitions)
+                    if(queue.Peek().UniqueIdentifier == transition.UniqueIdentifier)
+                    return;
+            if(transition.Queueable)
+                queue.Enqueue(transition);
         }
 
         /// <summary>
