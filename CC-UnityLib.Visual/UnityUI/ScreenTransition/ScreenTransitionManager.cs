@@ -1,5 +1,6 @@
 ﻿using CC_UnityLib.Core.Extensions;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
@@ -7,11 +8,23 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
     public class ScreenTransitionManager : MonoBehaviour
     {
         private bool isTransitioning = false;
+        private Queue<Transition> queue = new Queue<Transition>();
+
+        public void Transition(Transition transition)
+        {
+            Transition(transition.ScreenTransition, transition.BeforeCanvas, transition.AfterCanvas, transition.TransitionTime);
+        }
 
         public void Transition(ScreenTransition transition, Canvas before, Canvas after, float transitionTime)
         {
             if (isTransitioning)
-                return;
+            {
+                if (queue.Count == 0)
+                {
+                    queue.Enqueue(new Transition(transition, before, after, transitionTime));
+                    return;
+                }
+            }
             isTransitioning = true;
             before.gameObject.SetActive(true);
             GameObject bgInstance = new GameObject();
@@ -82,8 +95,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
             a.MoveChildren(aCanvas.gameObject);
             b.Destroy();
             a.Destroy();
-
-            isTransitioning = false;
+            FinalizeTransition();
         }
 
         IEnumerator SlideOverTransition(ScreenTransition transition, GameObject b, GameObject a, float tTime, Canvas bCanvas, Canvas aCanvas)
@@ -108,7 +120,14 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
             b.Destroy();
             a.Destroy();
 
+            FinalizeTransition();
+        }
+
+        private void FinalizeTransition()
+        {
             isTransitioning = false;
+            if (queue.Count > 0)
+                Transition(queue.Dequeue());
         }
 
         /// <summary>
