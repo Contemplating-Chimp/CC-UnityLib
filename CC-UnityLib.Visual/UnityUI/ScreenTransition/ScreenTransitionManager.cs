@@ -45,7 +45,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
             {
                 if (queue.Count == 0 && QueueEnabled)
                 {
-                    if (currentTransition.FamilyName != t.FamilyName)
+                    if (currentTransition.FamilyName != t.FamilyName && !CanQueueIdenticalTransitions)
                     {
                         EnqueueTransition(t);
                         return;
@@ -165,7 +165,6 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
         {
             if(queue.Count > 0)
                 if (!CanQueueIdenticalTransitions)
-                    if(queue.Peek().UniqueIdentifier == transition.UniqueIdentifier)
                     return;
             if(transition.Queueable)
                 queue.Enqueue(transition);
