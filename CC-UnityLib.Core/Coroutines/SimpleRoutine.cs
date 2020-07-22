@@ -10,8 +10,9 @@ namespace CC_UnityLib.Core.Coroutines
         List<CoroutineObject> Actions = new List<CoroutineObject>();
 
         private int _loopTimes = 1;
+        private int _loopTime = 0;
 
-        private int _position;
+        private int _position = -1;
 
 
         object IEnumerator.Current
@@ -22,13 +23,13 @@ namespace CC_UnityLib.Core.Coroutines
             }
         }
 
-        public CoroutineObject Current
+        public object Current
         {
             get
             {
                 try
                 {
-                    return Actions[_position];
+                    return Actions[_position].action;
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -37,6 +38,12 @@ namespace CC_UnityLib.Core.Coroutines
             }
         }
 
+        public static SimpleRoutine CreateRoutine()
+        {
+            var obj = new GameObject();
+            SimpleRoutine sr = obj.AddComponent<SimpleRoutine>();
+            return obj.GetComponent<SimpleRoutine>();
+        }
 
         public SimpleRoutine AddAction(Action action)
         {
@@ -56,28 +63,30 @@ namespace CC_UnityLib.Core.Coroutines
             return this;
         }
 
-        //public void Run()
-        //{
-        //    StartCoroutine(Coroutine());
-        //}
-
-        IEnumerator Coroutine()
-        {
-            for (int i = 0; i < _loopTimes; i++)
-            {
-                foreach (var a in Actions)
-                {
-                    if (a.type == typeof(WaitForSeconds))
-                        yield return (WaitForSeconds)a.action;
-                    if (a.type == typeof(Action))
-                        ((Action)a.action).Invoke();
-                }
-            }
-        }
 
         public bool MoveNext()
         {
             _position++;
+            if (_position >= Actions.Count)
+            {
+                if (_loopTime < _loopTimes)
+                {
+                    _loopTime++;
+                    _position = 0;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            CoroutineObject currentObject = Actions[_position];
+
+            if (currentObject.type == typeof(Action))
+            {
+                ((Action)currentObject.action)();
+            }
+
             return (_position < Actions.Count);
         }
 
