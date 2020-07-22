@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace CC_UnityLib.Core.Coroutines
@@ -12,30 +9,81 @@ namespace CC_UnityLib.Core.Coroutines
     {
         List<CoroutineObject> Actions = new List<CoroutineObject>();
 
-        public void AddAction(Action action)
+        private int _loopTimes = 1;
+
+        private int _position;
+
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+
+        public CoroutineObject Current
+        {
+            get
+            {
+                try
+                {
+                    return Actions[_position];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+        }
+
+
+        public SimpleRoutine AddAction(Action action)
         {
             Actions.Add(new CoroutineObject(action.GetType(), action));
+            return this;
         }
 
-        public void AddAction(YieldInstruction wfs)
+        public SimpleRoutine AddAction(YieldInstruction wfs)
         {
             Actions.Add(new CoroutineObject(wfs.GetType(), wfs));
+            return this;
         }
 
-        public void Run()
+        public SimpleRoutine LoopActions(int times)
         {
-            StartCoroutine(Coroutine());
+            _loopTimes = times;
+            return this;
         }
+
+        //public void Run()
+        //{
+        //    StartCoroutine(Coroutine());
+        //}
 
         IEnumerator Coroutine()
         {
-            foreach (var a in Actions)
+            for (int i = 0; i < _loopTimes; i++)
             {
-                if (a.type == typeof(WaitForSeconds))
-                    yield return (WaitForSeconds)a.action;
-                if (a.type == typeof(Action))
-                    ((Action)a.action).Invoke();
+                foreach (var a in Actions)
+                {
+                    if (a.type == typeof(WaitForSeconds))
+                        yield return (WaitForSeconds)a.action;
+                    if (a.type == typeof(Action))
+                        ((Action)a.action).Invoke();
+                }
             }
+        }
+
+        public bool MoveNext()
+        {
+            _position++;
+            return (_position < Actions.Count);
+        }
+
+        public void Reset()
+        {
+            _position = -1;
         }
 
         public class CoroutineObject

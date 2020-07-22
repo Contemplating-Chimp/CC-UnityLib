@@ -29,3 +29,4 @@ C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.c
 C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csproj.CopyComplete
 C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.dll
 C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.pdb
+E:\CC-UnityLib\CC-UnityLib.Core\obj\Debug\CC-UnityLib.Core.csprojAssemblyReference.cache
