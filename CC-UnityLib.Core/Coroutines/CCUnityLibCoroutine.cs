@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CC_UnityLib.Core.Coroutines
 {
-    public interface CCUnityLibCoroutine : IEnumerator
+    public interface ICCUnityLibCoroutine : IEnumerator
     {
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace CC_UnityLib.Core.Coroutines.Countdown
 {
-    public class CountDown : MonoBehaviour, CCUnityLibCoroutine
+    public class CountDown : ICCUnityLibCoroutine
     {
         /// <summary>
         /// The interval between ticks in seconds needs to be divisable through <see cref="CountDownTime"/>
@@ -42,6 +42,13 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
 
         private WaitForSeconds[] _countDownNumbers;
         private int _position;
+
+        public CountDown(float countDownInterval, string finalText, float countDownTime)
+        {
+            CountDownInterval = countDownInterval;
+            FinalText = finalText;
+            CountDownTime = countDownTime;
+        }
 
         object IEnumerator.Current
         {
@@ -85,23 +92,6 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             CountDownFinished?.Invoke(this, e);
         }
 
-        /// <summary>
-        /// Initiates the countdown
-        /// </summary>
-        /// <param name="countDownTime">The time it takes from start to finish</param>
-        /// <param name="interval">The interval between updating</param>
-        /// <param name="finalText">Text to show at the end</param>
-        /// <returns></returns>
-        public static CountDown Init(float countDownTime, float interval, string finalText)
-        {
-            var obj = new GameObject();
-            CountDown cnt = obj.AddComponent<CountDown>();
-            //countDownTime++; //this is so the iteration starts one higher
-            cnt.CountDownInterval = interval; cnt.FinalText = finalText; cnt.CountDownTime = countDownTime;
-            cnt.PopulateList();
-            return obj.GetComponent<CountDown>();
-        }
-
         private void PopulateList()
         {
             int iterations = GetLoopIterations();
@@ -131,7 +121,6 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             CountDownText = CountDownTime.ToString();
             if (CountDownTime <= FinalTime)
             {
-                gameObject.Destroy();
                 CountDownText = FinalText;
                 OnCountDownFinished(null);
             }

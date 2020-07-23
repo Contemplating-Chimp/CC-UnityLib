@@ -8,7 +8,7 @@ namespace CC_UnityLib.Core.Coroutines
     /// <summary>
     /// A simple routine used to call a coroutine for quick and simple tasks.
     /// </summary>
-    public class SimpleRoutine : MonoBehaviour, CCUnityLibCoroutine
+    public class SimpleRoutine : ICCUnityLibCoroutine
     {
         /// <summary>
         /// A list of the Actions that the simpleroutine will execute
@@ -27,6 +27,8 @@ namespace CC_UnityLib.Core.Coroutines
         /// The position in the Coroutine <see cref="IEnumerator"/>
         /// </summary>
         private int _position = -1;
+
+        public SimpleRoutine() { }
 
         /// <summary>
         /// Event that is called when the routine is started
@@ -82,9 +84,7 @@ namespace CC_UnityLib.Core.Coroutines
         /// <returns>Returns the routine</returns>
         public static SimpleRoutine CreateRoutine()
         {
-            var obj = new GameObject();
-            SimpleRoutine sr = obj.AddComponent<SimpleRoutine>();
-            return obj.GetComponent<SimpleRoutine>();
+            return new SimpleRoutine();
         }
 
         /// <summary>

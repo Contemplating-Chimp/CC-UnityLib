@@ -24,7 +24,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         private void OnTransitionStarted(TransitionEventArgs e)
         {
-            currentTransition = e.transition;
+            currentTransition = e.Transition;
             TransitionStarted?.Invoke(this, e);
         }
 

@@ -8,11 +8,11 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 {
     public class TransitionEventArgs : EventArgs
     {
-        public Transition transition { get; private set; }
+        public Transition Transition { get; private set; }
         
         public TransitionEventArgs(Transition t)
         {
-            transition = t;
+            Transition = t;
         }
     }
 }
