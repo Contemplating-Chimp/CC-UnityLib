@@ -43,11 +43,13 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
         private WaitForSeconds[] _countDownNumbers;
         private int _position;
 
-        public CountDown(float countDownInterval, string finalText, float countDownTime)
+        public CountDown(float countDownTime, float countDownInterval, string finalText)
         {
             CountDownInterval = countDownInterval;
             FinalText = finalText;
             CountDownTime = countDownTime;
+            CountDownTime++;
+            PopulateList();
         }
 
         object IEnumerator.Current
