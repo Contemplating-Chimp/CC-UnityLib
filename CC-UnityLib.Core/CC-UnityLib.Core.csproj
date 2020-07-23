@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Coroutines\CCUnityLibCoroutine.cs" />
     <Compile Include="Coroutines\Countdown\CountDown.cs" />
+    <Compile Include="Coroutines\SimpleRoutine.cs" />
     <Compile Include="Extensions\GameObjectExtension.cs" />
     <Compile Include="Extensions\ListExtension.cs" />
     <Compile Include="Extensions\TransformExtensions.cs" />

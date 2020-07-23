@@ -39,7 +39,33 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
                 OnCountDownTextChanged(null);
             }
         }
-        
+
+        private WaitForSeconds[] _countDownNumbers;
+        private int _position;
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+
+        public WaitForSeconds Current
+        {
+            get
+            {
+                try
+                {
+                    return _countDownNumbers[_position];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+        }
+
         /// <summary>
         /// Event called when the CountDownText is updated based on interval
         /// </summary>
@@ -70,44 +96,51 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
         {
             var obj = new GameObject();
             CountDown cnt = obj.AddComponent<CountDown>();
+            //countDownTime++; //this is so the iteration starts one higher
             cnt.CountDownInterval = interval; cnt.FinalText = finalText; cnt.CountDownTime = countDownTime;
+            cnt.PopulateList();
             return obj.GetComponent<CountDown>();
         }
 
-        private IEnumerator Coroutine()
+        private void PopulateList()
         {
             int iterations = GetLoopIterations();
+            _countDownNumbers = new WaitForSeconds[iterations];
             CountDownText = CountDownTime.ToString();
             for (int i = 0; i < iterations; i++)
             {
-                yield return new WaitForSeconds(CountDownInterval);
-                CountDownTime -= CountDownInterval;
-                CountDownText = CountDownTime.ToString();
-                if (CountDownTime <= FinalTime) 
-                {
-                    gameObject.Destroy();
-                    CountDownText = FinalText;
-                    OnCountDownFinished(null);
-                    break;
-                }
+                _countDownNumbers[i] = new WaitForSeconds(CountDownInterval);
             }
-
         }
 
         private int GetLoopIterations()
         {
-            if((CountDownTime % CountDownInterval) == 0)
+            if ((CountDownTime % CountDownInterval) == 0)
                 return (int)Mathf.Round(CountDownTime / CountDownInterval) + 1;
             else
                 throw new InvalidOperationException("The countDownTime % CountDownInterval had leftovers, the countdown will be incorrect. Make sure the interval fits into the CountDownTime.");
         }
-        
-        /// <summary>
-        /// Starts the coroutine
-        /// </summary>
-        public void Run()
+
+        public bool MoveNext()
         {
-            StartCoroutine(Coroutine());
+            _position++;
+            if (_position >= _countDownNumbers.Length)
+                return false;
+
+            CountDownTime -= CountDownInterval;
+            CountDownText = CountDownTime.ToString();
+            if (CountDownTime <= FinalTime)
+            {
+                gameObject.Destroy();
+                CountDownText = FinalText;
+                OnCountDownFinished(null);
+            }
+            return (_position < _countDownNumbers.Length);
+        }
+
+        public void Reset()
+        {
+            _position = -1;
         }
     }
 }
