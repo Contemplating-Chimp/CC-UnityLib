@@ -125,9 +125,9 @@ namespace CC_UnityLib.Core.Coroutines
             _position++;
             if (_position >= Actions.Count)
             {
+                _loopTime++;
                 if (_loopTime < _loopTimes)
                 {
-                    _loopTime++;
                     _position = 0;
                 }
                 else
