@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
@@ -18,20 +19,43 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
         private Transition currentTransition;
 
         public delegate void TransitionEventHandler(object sender, TransitionEventArgs e);
-        
-        public event TransitionEventHandler TransitionStarted;
-        public event TransitionEventHandler TransitionEnded;
+
+        private TransitionEventHandler transitionStarted;
+        public event TransitionEventHandler TransitionStarted
+        {
+            add
+            {
+                if (transitionStarted == null || !transitionStarted.GetInvocationList().Contains(value))
+                {
+                    transitionStarted += value;
+                }
+            }
+            remove { transitionStarted -= value; }
+        }
+        private TransitionEventHandler transitionEnded;
+        public event TransitionEventHandler TransitionEnded
+        {
+            add
+            {
+                if (transitionEnded == null || !transitionEnded.GetInvocationList().Contains(value))
+                {
+                    transitionEnded += value;
+                }
+            }
+            remove { transitionEnded -= value; }
+        }
 
         private void OnTransitionStarted(TransitionEventArgs e)
         {
             currentTransition = e.Transition;
-            TransitionStarted?.Invoke(this, e);
+            transitionStarted?.Invoke(this, e);
         }
 
         private void OnTransitionEnded(TransitionEventArgs e)
         {
             isTransitioning = false;
-            TransitionEnded?.Invoke(this, e);
+            transitionEnded?.Invoke(this, e);
+
         }
 
         private void Awake()
@@ -163,10 +187,10 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         private void EnqueueTransition(Transition transition)
         {
-            if(queue.Count > 0)
+            if (queue.Count > 0)
                 if (!CanQueueIdenticalTransitions)
                     return;
-            if(transition.Queueable)
+            if (transition.Queueable)
                 queue.Enqueue(transition);
         }
 
@@ -206,4 +230,4 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
         }
     }
 }
-    
+

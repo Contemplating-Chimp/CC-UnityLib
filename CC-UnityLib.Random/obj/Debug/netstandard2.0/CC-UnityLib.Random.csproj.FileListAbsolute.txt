@@ -12,3 +12,17 @@ E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.As
 E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.csproj.CopyComplete
 E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.dll
 E:\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.pdb
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\CC-UnityLib.Random.deps.json
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\CC-UnityLib.Random.dll
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\CC-UnityLib.Random.pdb
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\UnityEngine.CoreModule.dll
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\UnityEngine.SharedInternalsModule.dll
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\UnityEngine.CoreModule.xml
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\bin\Debug\netstandard2.0\UnityEngine.SharedInternalsModule.xml
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.csprojAssemblyReference.cache
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.csproj.CoreCompileInputs.cache
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.AssemblyInfoInputs.cache
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.AssemblyInfo.cs
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.csproj.CopyComplete
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.dll
+C:\Users\God\Documents\CC-UnityLib\CC-UnityLib.Random\obj\Debug\netstandard2.0\CC-UnityLib.Random.pdb
