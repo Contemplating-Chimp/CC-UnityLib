@@ -25,12 +25,21 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
         private void OnTransitionStarted(TransitionEventArgs e)
         {
             currentTransition = e.Transition;
+            foreach (Action a in e.Transition.OnTransitionStartedActions)
+            {
+                a.Invoke();
+            }
             TransitionStarted?.Invoke(this, e);
         }
 
         private void OnTransitionEnded(TransitionEventArgs e)
         {
             isTransitioning = false;
+            foreach (Action a in e.Transition.OnTransitionEndedActions)
+            {
+                a.Invoke();
+            }
+            currentTransition = null;
             TransitionEnded?.Invoke(this, e);
         }
 

@@ -18,6 +18,9 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         public bool Queueable { get; set; } = true;
 
+        public List<Action> OnTransitionStartedActions = new List<Action>();
+        public List<Action> OnTransitionEndedActions = new List<Action>();
+        
         public Transition(ScreenTransition screenTransition, Canvas beforeCanvas, Canvas afterCanvas, float transitionTime)
         {
             UniqueIdentifier = Guid.NewGuid();
@@ -56,6 +59,16 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
             AfterCanvas = afterCanvas;
             TransitionTime = transitionTime;
             Queueable = queueable;
+        }
+
+        public void AddTransitionStartedAction(params Action[] actions)
+        {
+            OnTransitionStartedActions.AddRange(actions);
+        }
+
+        public void AddTransitionEndedAction(params Action[] actions)
+        {
+            OnTransitionEndedActions.AddRange(actions);
         }
 
         public static Guid GenerateFamilyName() => Guid.NewGuid();
