@@ -60,7 +60,7 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
         public CountDown(float countDownTime, float countDownInterval, string finalText, float showFinalTextAfter)// : this(countDownTime, countDownInterval)
         {
             FinalText = finalText;
-            ShowFinalTextAfter = ShowFinalTextAfter;
+            ShowFinalTextAfter = showFinalTextAfter;
             CountDownInterval = countDownInterval;
             CountDownTime = countDownTime;
             CountDownTime++;
@@ -82,7 +82,7 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             CountDownTime = countDownTime;
             unityUIText = text;
             FinalText = finalText;
-            ShowFinalTextAfter = ShowFinalTextAfter;
+            ShowFinalTextAfter = showFinalTextAfter;
             CountDownTime++;
             PopulateList();
         }
@@ -162,16 +162,16 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
         public bool MoveNext()
         {
             _position++;
-            if (_position >= _countDownNumbers.Length)
-                return false;
-
-            if(_position == _countDownNumbers.Length && ShowFinalTextAfter > -1)
+            //MonoBehaviour.print(_position + " / " + _countDownNumbers.Length + " " + CountDownTime + " " + FinalTime);
+            //MonoBehaviour.print((_position == _countDownNumbers.Length) + " " + (ShowFinalTextAfter > -1));
+            if (_position == _countDownNumbers.Length && ShowFinalTextAfter > -1)
             {
                 OnShowFinalTextFinished(null);
                 return false;
             }
-
-
+            if (_position >= _countDownNumbers.Length)
+                return false;
+            
             CountDownTime -= CountDownInterval;
             CountDownText = CountDownTime.ToString();
             if (CountDownTime <= FinalTime)
