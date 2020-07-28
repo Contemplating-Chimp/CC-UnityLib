@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CC_UnityLib.Core.Coroutines.Countdown
 {
@@ -24,6 +25,8 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
         /// </summary>
         public float CountDownTime { get; private set; } = 3f;
 
+        public float ShowFinalTextAfter { get; private set; } = -1f;
+
         public float FinalTime { get; set; } = 0f;
 
         private string _countDownText;
@@ -36,18 +39,50 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             private set
             {
                 _countDownText = value;
+                unityUIText.text = value;
                 OnCountDownTextChanged(null);
             }
         }
 
+        private Text unityUIText;
+
         private WaitForSeconds[] _countDownNumbers;
         private int _position;
 
-        public CountDown(float countDownTime, float countDownInterval, string finalText)
+        public CountDown(float countDownTime, float countDownInterval)
         {
             CountDownInterval = countDownInterval;
-            FinalText = finalText;
             CountDownTime = countDownTime;
+            CountDownTime++;
+            PopulateList();
+        }
+
+        public CountDown(float countDownTime, float countDownInterval, string finalText, float showFinalTextAfter)// : this(countDownTime, countDownInterval)
+        {
+            FinalText = finalText;
+            ShowFinalTextAfter = ShowFinalTextAfter;
+            CountDownInterval = countDownInterval;
+            CountDownTime = countDownTime;
+            CountDownTime++;
+            PopulateList();
+        }
+
+        public CountDown(float countDownTime, float countDownInterval, Text text)// : this(countDownTime, countDownInterval, text, null)
+        {
+            unityUIText = text;
+            CountDownInterval = countDownInterval;
+            CountDownTime = countDownTime;
+            CountDownTime++;
+            PopulateList();
+        }
+
+        public CountDown(float countDownTime, float countDownInterval, Text text, string finalText, float showFinalTextAfter)// : this(countDownTime, countDownInterval)
+        {
+            CountDownInterval = countDownInterval;
+            CountDownTime = countDownTime;
+            unityUIText = text;
+            FinalText = finalText;
+            ShowFinalTextAfter = ShowFinalTextAfter;
             CountDownTime++;
             PopulateList();
         }
@@ -84,6 +119,8 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
         /// </summary>
         public event EventHandler CountDownFinished;
 
+        public event EventHandler ShowFinalTextFinished;
+
         private void OnCountDownTextChanged(EventArgs e)
         {
             CountDownTextChanged?.Invoke(this, e);
@@ -94,14 +131,23 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             CountDownFinished?.Invoke(this, e);
         }
 
+        private void OnShowFinalTextFinished(EventArgs e)
+        {
+            ShowFinalTextFinished?.Invoke(this, e);
+        }
+
         private void PopulateList()
         {
             int iterations = GetLoopIterations();
-            _countDownNumbers = new WaitForSeconds[iterations];
+            _countDownNumbers = new WaitForSeconds[iterations + (ShowFinalTextAfter > 1 ? 1 : 0)];
             CountDownText = CountDownTime.ToString();
             for (int i = 0; i < iterations; i++)
             {
                 _countDownNumbers[i] = new WaitForSeconds(CountDownInterval);
+            }
+            if(ShowFinalTextAfter > -1)
+            {
+                _countDownNumbers[_countDownNumbers.Length - 1] = new WaitForSeconds(ShowFinalTextAfter);
             }
         }
 
@@ -118,6 +164,13 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             _position++;
             if (_position >= _countDownNumbers.Length)
                 return false;
+
+            if(_position == _countDownNumbers.Length && ShowFinalTextAfter > -1)
+            {
+                OnShowFinalTextFinished(null);
+                return false;
+            }
+
 
             CountDownTime -= CountDownInterval;
             CountDownText = CountDownTime.ToString();
