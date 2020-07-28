@@ -125,14 +125,21 @@ namespace CC_UnityLib.Core.Coroutines
             _position++;
             if (_position >= Actions.Count)
             {
-                _loopTime++;
-                if (_loopTime < _loopTimes)
+                if (_loopTimes == -1)
                 {
                     _position = 0;
                 }
                 else
                 {
-                    return false;
+                    _loopTime++;
+                    if (_loopTime < _loopTimes)
+                    {
+                        _position = 0;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 

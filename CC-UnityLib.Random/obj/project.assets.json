@@ -179,23 +179,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\God\\.nuget\\packages\\": {},
+    "C:\\Users\\Jan Julius\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\God\\Documents\\CC-UnityLib\\CC-UnityLib.Random\\CC-UnityLib.Random.csproj",
+      "projectUniqueName": "E:\\CC-UnityLib\\CC-UnityLib.Random\\CC-UnityLib.Random.csproj",
       "projectName": "CC-UnityLib.Random",
-      "projectPath": "C:\\Users\\God\\Documents\\CC-UnityLib\\CC-UnityLib.Random\\CC-UnityLib.Random.csproj",
-      "packagesPath": "C:\\Users\\God\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\God\\Documents\\CC-UnityLib\\CC-UnityLib.Random\\obj\\",
+      "projectPath": "E:\\CC-UnityLib\\CC-UnityLib.Random\\CC-UnityLib.Random.csproj",
+      "packagesPath": "C:\\Users\\Jan Julius\\.nuget\\packages\\",
+      "outputPath": "E:\\CC-UnityLib\\CC-UnityLib.Random\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\God\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jan Julius\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
