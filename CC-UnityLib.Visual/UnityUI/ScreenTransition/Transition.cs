@@ -20,6 +20,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         public List<Action> OnTransitionStartedActions = new List<Action>();
         public List<Action> OnTransitionEndedActions = new List<Action>();
+        public List<Action> OnTransitionFinalizedActions = new List<Action>();
         
         public Transition(ScreenTransition screenTransition, Canvas beforeCanvas, Canvas afterCanvas, float transitionTime)
         {
@@ -69,6 +70,11 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
         public void AddTransitionEndedAction(params Action[] actions)
         {
             OnTransitionEndedActions.AddRange(actions);
+        }
+
+        public void AddTransitionFinalizedAction(params Action[] actions)
+        {
+            OnTransitionFinalized.AddRange(actions);
         }
 
         public static Guid GenerateFamilyName() => Guid.NewGuid();

@@ -17,10 +17,14 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         private Transition currentTransition;
 
+        public GameObject BeforeCanvasInstance;
+        public GameObject AfterCanvasInstance;
+
         public delegate void TransitionEventHandler(object sender, TransitionEventArgs e);
         
         public event TransitionEventHandler TransitionStarted;
         public event TransitionEventHandler TransitionEnded;
+        public event TransitionEventHandler TransitionFinalized;
 
         private void OnTransitionStarted(TransitionEventArgs e)
         {
@@ -34,13 +38,22 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         private void OnTransitionEnded(TransitionEventArgs e)
         {
-            isTransitioning = false;
             foreach (Action a in e.Transition.OnTransitionEndedActions)
             {
                 a.Invoke();
             }
-            currentTransition = null;
             TransitionEnded?.Invoke(this, e);
+        }
+
+        private void OnTransitionFinalized(TransitionEventArgs e)
+        {
+            isTransitioning = false;
+            foreach (Action a in e.Transition.OnTransitionFinalizedActions)
+            {
+                a.Invoke();
+            }
+            currentTransition = null;
+            TransitionFinalized?.Invoke(this, e);
         }
 
         private void Awake()
@@ -63,29 +76,29 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
                 }
                 return;
             }
+            BeforeCanvasInstance = new GameObject();
+            AfterCanvasInstance = new GameObject();
             OnTransitionStarted(new TransitionEventArgs(t));
             isTransitioning = true;
             t.BeforeCanvas.gameObject.SetActive(true);
-            GameObject bgInstance = new GameObject();
-            bgInstance.transform.parent = t.BeforeCanvas.gameObject.transform;
+            BeforeCanvasInstance.transform.parent = t.BeforeCanvas.gameObject.transform;
 
             for (int i = t.BeforeCanvas.transform.childCount - 1; i >= 0; i--)
             {
-                t.BeforeCanvas.transform.GetChild(i).parent = bgInstance.transform;
+                t.BeforeCanvas.transform.GetChild(i).parent = BeforeCanvasInstance.transform;
             }
-            bgInstance.transform.ReverseChildren();
+            BeforeCanvasInstance.transform.ReverseChildren();
 
             t.AfterCanvas.gameObject.SetActive(true);
-            GameObject agInstance = new GameObject();
-            agInstance.transform.parent = t.AfterCanvas.gameObject.transform;
+            AfterCanvasInstance.transform.parent = t.AfterCanvas.gameObject.transform;
 
             for (int i = t.AfterCanvas.transform.childCount - 1; i >= 0; i--)
             {
-                t.AfterCanvas.transform.GetChild(i).parent = agInstance.transform;
+                t.AfterCanvas.transform.GetChild(i).parent = AfterCanvasInstance.transform;
             }
-            agInstance.transform.ReverseChildren();
+            AfterCanvasInstance.transform.ReverseChildren();
 
-            ProcessTransition(t, bgInstance, agInstance);
+            ProcessTransition(t, BeforeCanvasInstance, AfterCanvasInstance);
         }
 
         internal void ProcessTransition(Transition t, GameObject bgInstance, GameObject agInstance)
@@ -126,6 +139,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
                 agInstance.transform.position = Vector3.Lerp(startPosA, targetPosA, t);
                 yield return null;
             }
+            OnTransitionEnded(new TransitionEventArgs(transition));
             bgInstance.transform.position = startPosB;
             bgInstance.ReverseChildren();
             agInstance.ReverseChildren();
@@ -165,7 +179,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         private void FinalizeTransition(Transition transition)
         {
-            OnTransitionEnded(new TransitionEventArgs(transition));
+            OnTransitionFinalized(new TransitionEventArgs(transition));
             if (queue.Count > 0 && QueueEnabled)
                 Transition(queue.Dequeue());
         }
