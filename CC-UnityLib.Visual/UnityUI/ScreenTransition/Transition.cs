@@ -74,7 +74,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
 
         public void AddTransitionFinalizedAction(params Action[] actions)
         {
-            OnTransitionFinalized.AddRange(actions);
+            OnTransitionFinalizedActions.AddRange(actions);
         }
 
         public static Guid GenerateFamilyName() => Guid.NewGuid();
