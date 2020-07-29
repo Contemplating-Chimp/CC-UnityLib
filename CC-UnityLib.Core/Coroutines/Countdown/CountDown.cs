@@ -39,7 +39,8 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             private set
             {
                 _countDownText = value;
-                unityUIText.text = value;
+                if(unityUIText != null)
+                    unityUIText.text = value;
                 OnCountDownTextChanged(null);
             }
         }
@@ -139,11 +140,15 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
         private void PopulateList()
         {
             int iterations = GetLoopIterations();
+            MonoBehaviour.print("test1");
             _countDownNumbers = new WaitForSeconds[iterations + (ShowFinalTextAfter > 1 ? 1 : 0)];
+            MonoBehaviour.print("test2");
             CountDownText = CountDownTime.ToString();
+            MonoBehaviour.print("test3");
             for (int i = 0; i < iterations; i++)
             {
                 _countDownNumbers[i] = new WaitForSeconds(CountDownInterval);
+                MonoBehaviour.print("testloop");
             }
             if(ShowFinalTextAfter > -1)
             {
