@@ -23,6 +23,7 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
         public delegate void TransitionEventHandler(object sender, TransitionEventArgs e);
         
         public event TransitionEventHandler TransitionStarted;
+        public event TransitionEventHandler TransitionReady;
         public event TransitionEventHandler TransitionEnded;
         public event TransitionEventHandler TransitionFinalized;
 
@@ -34,6 +35,15 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
                 a.Invoke();
             }
             TransitionStarted?.Invoke(this, e);
+        }
+
+        private void OnTransitionReady(TransitionEventArgs e)
+        {
+            foreach(Action a in e.Transition.OnTransitionReadyActions)
+            {
+                a.Invoke();
+            }
+            TransitionReady?.Invoke(this, e);
         }
 
         private void OnTransitionEnded(TransitionEventArgs e)
@@ -97,6 +107,8 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
                 t.AfterCanvas.transform.GetChild(i).parent = AfterCanvasInstance.transform;
             }
             AfterCanvasInstance.transform.ReverseChildren();
+
+            OnTransitionReady(null);
 
             ProcessTransition(t, BeforeCanvasInstance, AfterCanvasInstance);
         }
