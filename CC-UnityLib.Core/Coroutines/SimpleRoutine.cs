@@ -16,6 +16,11 @@ namespace CC_UnityLib.Core.Coroutines
         public List<CoroutineObject> Actions { get; private set; } = new List<CoroutineObject>();
 
         /// <summary>
+        /// A list of conditions that will halt the coroutine
+        /// </summary>
+        public List<Func<bool>> StopConditions { get; private set; } = new List<Func<bool>>();
+
+        /// <summary>
         /// Amount of times the <see cref="Actions"/> will loop over
         /// </summary>
         private int _loopTimes = 1;
@@ -108,6 +113,17 @@ namespace CC_UnityLib.Core.Coroutines
             Actions.Add(new CoroutineObject(wfs.GetType(), wfs));
             return this;
         }
+       
+        /// <summary>
+        /// Adds a stop condition to the coroutine
+        /// </summary>
+        /// <param name="condition"></param>
+        public SimpleRoutine AddStopCondition(Func<bool> condition)
+        {
+            StopConditions.Add(condition);
+            LoopActions(-1);
+            return this;
+        }
 
         /// <summary>
         /// Set how many times the routine should do the set actions over. Defaults to 1.
@@ -122,7 +138,20 @@ namespace CC_UnityLib.Core.Coroutines
         
         public bool MoveNext()
         {
+            if (_position == -1 && _loopTime == 0)
+                OnRoutineStarted(null);
             _position++;
+            OnNextLoopTime(null);
+
+            foreach (Func<bool> stopcondition in StopConditions)
+            {
+                if (stopcondition.Invoke())
+                {
+                    OnRoutineEnded(null);
+                    return false;
+                }
+            }
+
             if (_position >= Actions.Count)
             {
                 if (_loopTimes == -1)
@@ -138,6 +167,7 @@ namespace CC_UnityLib.Core.Coroutines
                     }
                     else
                     {
+                        OnRoutineEnded(null);
                         return false;
                     }
                 }
@@ -147,6 +177,7 @@ namespace CC_UnityLib.Core.Coroutines
 
             if (currentObject.type == typeof(Action))
             {
+                OnMoveNextAction(null);
                 ((Action)currentObject.action)();
             }
 
