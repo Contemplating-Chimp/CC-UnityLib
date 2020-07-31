@@ -54,7 +54,7 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
         {
             CountDownInterval = countDownInterval;
             CountDownTime = countDownTime;
-            CountDownTime++;
+            //CountDownTime++;
             PopulateList();
         }
 
@@ -64,7 +64,7 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             ShowFinalTextAfter = showFinalTextAfter;
             CountDownInterval = countDownInterval;
             CountDownTime = countDownTime;
-            CountDownTime++;
+            //CountDownTime++;
             PopulateList();
         }
 
@@ -73,7 +73,7 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             unityUIText = text;
             CountDownInterval = countDownInterval;
             CountDownTime = countDownTime;
-            CountDownTime++;
+            //CountDownTime++;
             PopulateList();
         }
 
@@ -84,7 +84,7 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
             unityUIText = text;
             FinalText = finalText;
             ShowFinalTextAfter = showFinalTextAfter;
-            CountDownTime++;
+            //CountDownTime++;
             PopulateList();
         }
 
@@ -154,10 +154,13 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
 
         private int GetLoopIterations()
         {
-            if ((CountDownTime % CountDownInterval) == 0)
+            int cdt = (int)Math.Round(CountDownTime * 1000);
+            int cdi = (int)Math.Round(CountDownInterval * 1000);
+            if ((cdt % cdi) == 0)
                 return (int)Mathf.Round(CountDownTime / CountDownInterval) + 1;
             else
-                throw new InvalidOperationException("The countDownTime % CountDownInterval had leftovers, the countdown will be incorrect. Make sure the interval fits into the CountDownTime.");
+                throw new InvalidOperationException($"The countDownTime % CountDownInterval had leftovers, the countdown will be incorrect. Make sure the interval fits into the CountDownTime. was:" +
+                    $" {CountDownTime} % {CountDownInterval} = {CountDownTime % CountDownInterval}");
         }
 
         public bool MoveNext()
@@ -170,8 +173,8 @@ namespace CC_UnityLib.Core.Coroutines.Countdown
                 OnShowFinalTextFinished(null);
                 return false;
             }
-            if (_position >= _countDownNumbers.Length)
-                return false;
+            //if (_position >= _countDownNumbers.Length)
+            //    return false;
             
             CountDownTime -= CountDownInterval;
             CountDownText = CountDownTime.ToString();
