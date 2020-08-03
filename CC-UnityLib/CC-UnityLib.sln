@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC-UnityLib.Visual", "..\CC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC-UnityLib.Input", "..\CC-UnityLib.Input\CC-UnityLib.Input.csproj", "{C2A7D400-F748-4433-B102-43E9DF0BE398}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC-UnityLib.Random", "..\CC-UnityLib.Random\CC-UnityLib.Random.csproj", "{98B9BE7D-DD0D-4062-9FAD-D469840C8857}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC-UnityLib.Rand", "..\CC-UnityLib.Rand\CC-UnityLib.Rand.csproj", "{1FD5A87C-F145-411B-A7CB-A5B287138672}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{C2A7D400-F748-4433-B102-43E9DF0BE398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2A7D400-F748-4433-B102-43E9DF0BE398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2A7D400-F748-4433-B102-43E9DF0BE398}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98B9BE7D-DD0D-4062-9FAD-D469840C8857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98B9BE7D-DD0D-4062-9FAD-D469840C8857}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98B9BE7D-DD0D-4062-9FAD-D469840C8857}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98B9BE7D-DD0D-4062-9FAD-D469840C8857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD5A87C-F145-411B-A7CB-A5B287138672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD5A87C-F145-411B-A7CB-A5B287138672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD5A87C-F145-411B-A7CB-A5B287138672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD5A87C-F145-411B-A7CB-A5B287138672}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

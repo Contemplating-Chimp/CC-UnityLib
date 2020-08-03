@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
-namespace CC_UnityLib.Random.Extensions
+namespace CC_UnityLib.Rand
 {
     public static class Vector2Random
     {

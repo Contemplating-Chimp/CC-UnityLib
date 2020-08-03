@@ -1,0 +1,11 @@
+E:\CC-UnityLib\CC-UnityLib.Rand\bin\Debug\CC-UnityLib.Rand.dll
+E:\CC-UnityLib\CC-UnityLib.Rand\bin\Debug\CC-UnityLib.Rand.pdb
+E:\CC-UnityLib\CC-UnityLib.Rand\bin\Debug\UnityEngine.CoreModule.dll
+E:\CC-UnityLib\CC-UnityLib.Rand\bin\Debug\UnityEngine.SharedInternalsModule.dll
+E:\CC-UnityLib\CC-UnityLib.Rand\bin\Debug\UnityEngine.CoreModule.xml
+E:\CC-UnityLib\CC-UnityLib.Rand\bin\Debug\UnityEngine.SharedInternalsModule.xml
+E:\CC-UnityLib\CC-UnityLib.Rand\obj\Debug\CC-UnityLib.Rand.csprojAssemblyReference.cache
+E:\CC-UnityLib\CC-UnityLib.Rand\obj\Debug\CC-UnityLib.Rand.csproj.CoreCompileInputs.cache
+E:\CC-UnityLib\CC-UnityLib.Rand\obj\Debug\CC-UnityLib.Rand.csproj.CopyComplete
+E:\CC-UnityLib\CC-UnityLib.Rand\obj\Debug\CC-UnityLib.Rand.dll
+E:\CC-UnityLib\CC-UnityLib.Rand\obj\Debug\CC-UnityLib.Rand.pdb
