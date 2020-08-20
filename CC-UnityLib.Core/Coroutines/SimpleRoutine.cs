@@ -113,6 +113,17 @@ namespace CC_UnityLib.Core.Coroutines
             Actions.Add(new CoroutineObject(wfs.GetType(), wfs));
             return this;
         }
+
+        /// <summary>
+        /// Adds an action (CustomYieldInstruction) such as WaitForRealtimeSeconds
+        /// </summary>
+        /// <param name="wfs">The instruction</param>
+        /// <returns>The routine/returns>
+        public SimpleRoutine AddAction(CustomYieldInstruction wfs)
+        {
+            Actions.Add(new CoroutineObject(wfs.GetType(), wfs));
+            return this;
+        }
        
         /// <summary>
         /// Adds a stop condition to the coroutine
