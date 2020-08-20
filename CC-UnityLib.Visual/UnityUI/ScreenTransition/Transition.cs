@@ -32,6 +32,17 @@ namespace CC_UnityLib.Visual.UnityUI.ScreenTransition
             this.TransitionTime = transitionTime;
         }
 
+        public Transition(ScreenTransition screenTransition, Canvas beforeCanvas, Canvas afterCanvas, float transitionTime, Guid familyName)
+        {
+            UniqueIdentifier = Guid.NewGuid();
+            this.ScreenTransition = screenTransition;
+            this.BeforeCanvas = beforeCanvas;
+            this.AfterCanvas = afterCanvas;
+            this.TransitionTime = transitionTime;
+            this.FamilyName = familyName;
+        }
+
+
         public Transition(Guid uniqueIdentifier, ScreenTransition screenTransition, Canvas beforeCanvas, Canvas afterCanvas, float transitionTime, bool queueable)
         {
             UniqueIdentifier = Guid.NewGuid();
